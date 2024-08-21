@@ -18,7 +18,7 @@ func main() {
 	//r.HandleFunc("/handler/{mass:[0-9]+}/{velocity:[0-9]+}/", RobotHandler)
 
 	//2dotsDistance
-	r.HandleFunc("/handler/{x1:[0-9]+}{y1:[0-9]+}/{x2:[0-9]+}{y2:[0-9]+}", dotsDistanceHandler)
+	r.HandleFunc("/handler/{x1:[0-9]+}{y1:[0-9]+}/{x2:[0-9]+}{y2:[0-9]+}", pkg.MiddleWare(dotsDistanceHandler))
 
 	log.Fatal(http.ListenAndServe(":8080", r))
 

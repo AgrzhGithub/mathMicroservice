@@ -3,6 +3,7 @@ package pkg
 import (
 	"encoding/json"
 	"github.com/gorilla/mux"
+	"log"
 	"math"
 	"net/http"
 	"strconv"
@@ -53,4 +54,14 @@ func DotsHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonResponse)
 
+}
+
+func MiddleWare(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		val := r.Header.Get("User-Role")
+		if val == "Admin228" {
+			log.Println("Accepted")
+		}
+		next(w, r)
+	}
 }
